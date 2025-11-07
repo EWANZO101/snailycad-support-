@@ -143,12 +143,17 @@
       </a>
 
       <div class="hidden md:flex items-center space-x-6">
-        <div class="relative">
+        <div class="relative group">
           <input type="text" id="searchInput" placeholder="Search tools..." 
             class="px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md border border-gray-600/50 text-white placeholder-gray-400 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400/50 transition-all w-48">
           <svg class="absolute right-3 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
+          
+          <!-- Search Results Dropdown -->
+          <div id="searchResults" class="absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-lg shadow-xl hidden max-h-96 overflow-y-auto z-50">
+            <div id="resultsList" class="p-2"></div>
+          </div>
         </div>
         <a href="#tools" class="nav-link text-gray-300 text-sm">Tools</a>
         <a href="#support" class="nav-link text-gray-300 text-sm">Quick Support</a>
@@ -306,27 +311,61 @@
 
   <script>
     const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const resultsList = document.getElementById('resultsList');
     const toolLinks = document.querySelectorAll('.tool-btn');
-    const sections = document.querySelectorAll('[id="tools"], [id="support"], [id="about"]');
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.group')) {
+        searchResults.classList.add('hidden');
+      }
+    });
 
     searchInput?.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-
-      toolLinks.forEach(link => {
-        const text = link.textContent.toLowerCase();
-        link.style.display = text.includes(query) ? 'block' : 'none';
-      });
+      const query = e.target.value.toLowerCase().trim();
+      resultsList.innerHTML = '';
 
       if (query.length === 0) {
-        toolLinks.forEach(link => link.style.display = 'block');
+        searchResults.classList.add('hidden');
+        return;
       }
+
+      // Collect all tools with their data
+      const tools = Array.from(toolLinks).map(link => ({
+        text: link.textContent.trim(),
+        href: link.href,
+        element: link
+      }));
+
+      // Filter matching tools
+      const matches = tools.filter(tool => 
+        tool.text.toLowerCase().includes(query)
+      );
+
+      if (matches.length === 0) {
+        resultsList.innerHTML = '<div class="px-4 py-3 text-gray-400 text-sm">No tools found</div>';
+        searchResults.classList.remove('hidden');
+        return;
+      }
+
+      // Display results
+      searchResults.classList.remove('hidden');
+      matches.forEach(match => {
+        const resultItem = document.createElement('a');
+        resultItem.href = match.href;
+        resultItem.download = true;
+        resultItem.className = 'block px-4 py-3 hover:bg-blue-600/20 border-b border-gray-700 text-white text-sm transition-colors cursor-pointer';
+        resultItem.textContent = match.text;
+        resultsList.appendChild(resultItem);
+      });
     });
 
     searchInput?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        const visibleTools = Array.from(toolLinks).filter(link => link.style.display !== 'none');
-        if (visibleTools.length > 0) {
-          visibleTools[0].click();
+        const firstResult = resultsList.querySelector('a');
+        if (firstResult) {
+          firstResult.click();
         }
       }
     });
