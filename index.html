@@ -11,53 +11,111 @@
 
   <style>
     body {
-      background-color: #0f172a; /* dark blue-gray */
+      background-color: #0f172a; /* dark background */
       color: #f8fafc;
       font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6">
+<body class="flex flex-col min-h-screen">
 
-  <header class="mb-10 text-center">
-    <h1 class="text-4xl font-extrabold text-white mb-2">SnailyCAD Support Hub</h1>
-    <p class="text-gray-400">Your central place for recovery, updates, and tools</p>
-  </header>
+  <!-- NAVBAR -->
+  <nav class="bg-gray-900 border-b border-gray-800 px-4 py-3">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+      <a href="#" class="flex items-center space-x-2">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="SnailyCAD" class="h-8 w-8">
+        <span class="text-xl font-bold text-white">SnailyCAD Support</span>
+      </a>
 
-  <main class="grid gap-4 w-full max-w-md">
-    <!-- Buttons -->
-    <a href="tools/recovery_tools.zip" download
-       class="w-full text-center py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition font-semibold">
-       🛠️ Recovery Tools
-    </a>
+      <button data-collapse-toggle="navbar-default" type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-400 rounded-lg md:hidden hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600"
+        aria-controls="navbar-default" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
 
-    <a href="scripts/start_cad.bat" download
-       class="w-full text-center py-3 rounded-lg bg-green-600 hover:bg-green-700 transition font-semibold">
-       🚀 Start Your CAD
-    </a>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <ul class="flex flex-col p-4 mt-4 border border-gray-800 rounded-lg bg-gray-900 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent">
+          <li><a href="#" class="block py-2 pl-3 pr-4 text-white hover:text-blue-500">Home</a></li>
+          <li><a href="#tools" class="block py-2 pl-3 pr-4 text-white hover:text-blue-500">Tools</a></li>
+          <li><a href="#about" class="block py-2 pl-3 pr-4 text-white hover:text-blue-500">About</a></li>
+          <li><a href="#contact" class="block py-2 pl-3 pr-4 text-white hover:text-blue-500">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <a href="scripts/update.bat" download
-       class="w-full text-center py-3 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition font-semibold">
-       🔄 Update Your CAD
-    </a>
+  <!-- MAIN CONTENT -->
+  <main class="flex flex-col items-center justify-center flex-grow p-6">
+    <header class="mb-10 text-center">
+      <h1 class="text-4xl font-extrabold text-white mb-2">SnailyCAD Support Hub</h1>
+      <p class="text-gray-400">Your central place for recovery, updates, and tools</p>
+    </header>
 
-    <a href="scripts/unlink_discord.bat" download
-       class="w-full text-center py-3 rounded-lg bg-red-600 hover:bg-red-700 transition font-semibold">
-       🔗 Unlink Discord Account
-    </a>
+    <section id="tools" class="grid gap-4 w-full max-w-md">
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/full-snailycad-recovery.sh" download
+        class="w-full text-center py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition font-semibold">
+        🛠️ Full SnailyCAD Recovery Script
+      </a>
 
-    <a href="scripts/disable_force_discord.bat" download
-       class="w-full text-center py-3 rounded-lg bg-purple-600 hover:bg-purple-700 transition font-semibold">
-       🚫 Disable Force Discord
-    </a>
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/start(2).bat" download
+        class="w-full text-center py-3 rounded-lg bg-green-600 hover:bg-green-700 transition font-semibold">
+        🚀 Start Your CAD
+      </a>
 
-    <a href="#" 
-       class="w-full text-center py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 transition font-semibold">
-       💻 SnailyCAD Tablet by Whitigol
-    </a>
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/update(2).bat" download
+        class="w-full text-center py-3 rounded-lg bg-yellow-600 hover:bg-yellow-700 transition font-semibold">
+        🔄 Update Your CAD
+      </a>
+
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/unlink-discord.bat" download
+        class="w-full text-center py-3 rounded-lg bg-red-600 hover:bg-red-700 transition font-semibold">
+        🔗 Unlink Discord (Windows)
+      </a>
+
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/unlink_discord.sh" download
+        class="w-full text-center py-3 rounded-lg bg-orange-600 hover:bg-orange-700 transition font-semibold">
+        🔗 Unlink Discord (Linux)
+      </a>
+
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/disable_force_discord.bat" download
+        class="w-full text-center py-3 rounded-lg bg-purple-600 hover:bg-purple-700 transition font-semibold">
+        🚫 Disable Force Discord (Windows)
+      </a>
+
+      <a href="https://docs.swiftpeakhosting.co.uk/caddownloads/disable_force_discord.sh" download
+        class="w-full text-center py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 transition font-semibold">
+        🚫 Disable Force Discord (Linux)
+      </a>
+
+      <a href="#" 
+        class="w-full text-center py-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition font-semibold">
+        💻 SnailyCAD Tablet by Whitigol
+      </a>
+    </section>
+
+    <section id="about" class="mt-16 max-w-2xl text-center">
+      <h2 class="text-2xl font-semibold mb-2">About</h2>
+      <p class="text-gray-400">
+        SnailyCAD Support provides quick access to essential recovery and setup tools to keep your CAD running smoothly.
+        All scripts and resources are provided and maintained by SwiftPeak Hosting and contributors.
+      </p>
+    </section>
+
+    <section id="contact" class="mt-12 text-center">
+      <h2 class="text-2xl font-semibold mb-2">Contact Support</h2>
+      <p class="text-gray-400">
+        Need help? Reach out on our <a href="#" class="text-blue-400 hover:underline">Discord server</a>.
+      </p>
+    </section>
   </main>
 
-  <footer class="mt-10 text-gray-500 text-sm">
+  <!-- FOOTER -->
+  <footer class="mt-10 py-4 text-center text-gray-500 text-sm border-t border-gray-800">
     © 2025 SnailyCAD Support — All Rights Reserved
   </footer>
 
